@@ -1,0 +1,105 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="test">
+    <script>
+
+        const DATA_COUNT = 7;
+        const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
+
+        const labels = {
+            1: 'January',
+            2:'February',
+            3:'March',
+            4:'April',
+            5:'May',
+            6:'June',
+            7:'July',
+            8:'August',
+            9:'September',
+            10:'October',
+            11:'November',
+            12:'December'
+        };
+        const LABER_NAME = [
+            labels[1],
+            labels[2],
+            labels[3],
+            labels[4],
+            labels[5],
+            labels[6],
+            labels[7],
+            labels[8],
+            labels[9],
+            labels[10],
+            labels[11],
+            labels[12],
+        ]
+        const COLORS = [
+            '#4dc9f6',
+            '#f67019',
+            '#f53794',
+            '#537bc4',
+            '#acc236',
+            '#166a8f',
+            '#00a950',
+            '#58595b',
+            '#8549ba'
+        ];
+        const CHART_COLORS = {
+            red: 'rgb(255, 99, 132)',
+            orange: 'rgb(255, 159, 64)',
+            yellow: 'rgb(255, 205, 86)',
+            green: 'rgb(75, 192, 192)',
+            blue: 'rgb(54, 162, 235)',
+            purple: 'rgb(153, 102, 255)',
+            grey: 'rgb(201, 203, 207)'
+        };
+        const NAMED_COLORS = [
+            CHART_COLORS.red,
+            CHART_COLORS.orange,
+            CHART_COLORS.yellow,
+            CHART_COLORS.green,
+            CHART_COLORS.blue,
+            CHART_COLORS.purple,
+            CHART_COLORS.grey,
+        ];
+        const data = {
+            labels: labels[1],
+            datasets: [
+                {
+                    label: 'Doanh thu',
+                    data: 12,
+                    borderColor: CHART_COLORS.red,
+                    backgroundColor:CHART_COLORS.red,
+                },
+                {
+                    label: 'Chi phí',
+                    data: 23,
+                    borderColor: CHART_COLORS.blue,
+                    backgroundColor:CHART_COLORS.blue,
+                }
+            ]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Thống kê doanh thu QBrestaurant'
+                    }
+                }
+            },
+        };
+
+
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, config);
+    </script>
+</th:block>
+</html>

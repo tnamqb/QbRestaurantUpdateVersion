@@ -1,0 +1,38 @@
+
+#deskDisplay{
+    margin-top: 50px;
+    overflow-y: scroll;
+    max-height: 70vh;
+}
+.listOrder-style{
+    height: 70vh;
+    margin-top: -10px;
+}
+
+#listOrderOfDeskShow{
+    overflow-y: scroll;
+    max-height: 40vh;
+    margin-top: 10px;
+    border-bottom: 1px solid burlywood;
+}
+#listOrderCreate{
+    overflow-y: scroll;
+    max-height: 30vh;
+    margin-top: 10px;
+}
+
+.button-left-bottom a{
+    width: 48%;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 100%;
+    min-height: 60px;
+}
+.button-right-bottom a{
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 100%;
+    min-height: 60px;
+}
+

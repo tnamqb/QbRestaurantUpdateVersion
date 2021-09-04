@@ -1,0 +1,214 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/head::header"></head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!--    Navbar start-->
+  <th:block th:replace="/layout/nav :: navbar"></th:block>
+  <!--    Navbar end-->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Sản phẩm</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Quản lý sản phẩm</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.content-header -->
+
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="d-flex flex-row-reverse bd-highlight">
+            <div class="p-2 bd-highlight">
+              <a onclick="showModal()" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Thêm sản phẩm
+              </a>
+            </div>
+            <div class="p-2 bd-highlight">
+              <a onclick="showModalCategory()" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Thêm danh mục
+              </a>
+            </div>
+          </div>
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover cell-border text-nowrap table-product" id="productList">
+              <thead class="thead-dark text-center">
+              <tr>
+                <th>Tên sản phẩm</th>
+                <th>Ảnh</th>
+                <th>Giá</th>
+                <th>Thuộc danh mục</th>
+                <th class="text-center"></th>
+              </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Start Add Modal product -->
+    <div class="modal" id="productModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content col-8">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Thêm sản phẩm</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body" >
+            <form id="create-form">
+              <div class="form-group">
+                <label>Tên sản phẩm</label>
+                <input type="text" name="product_name" id="product_name" class="form-control" data-rule-required="true" data-msg-required="The product name is required.">
+                <input type="hidden" name="productId" id="productId">
+                <input type="hidden" id="status">
+              </div>
+              <div class="form-group">
+                <label>Giá</label>
+                <input type="number" name="price" id="price" class="form-control" data-rule-required="true" data-msg-required="The manufactory is required.">
+              </div>
+              <div class="form-group">
+                <label>Mô tả</label>
+                <textarea name="description" id="description" class="form-control" data-rule-required="true" data-msg-required="Mô tả không để trống.."></textarea>
+              </div>
+              <div class="form-group">
+                <label for="category">Danh mục</label>
+                <select id="category" class="form-control custom-select">
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <form id="singleUploadForm" name="singleUploadForm">
+                  <label>
+                    Chọn ảnh:
+                    <input id="singleFileUploadInput" type="file" name="file" class="file-input">
+                  </label>
+                  <input type="submit" class="upload" hidden>
+                </form>
+                <input hidden type="text" id="imageName" value="">
+              </div>
+            </form>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="create-button" >Lưu</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal product -->
+    <div class="modal" id="editProductModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content col-8">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Chỉnh sửa sản phẩm</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body" >
+            <form id="edit-form">
+              <div class="form-group">
+                <label>Tên sản phẩm</label>
+                <input type="text" name="up_product_name" id="up_product_name" class="form-control" data-rule-required="true" data-msg-required="The product name is required.">
+                <input type="hidden" name="up_productId" id="up_productId" value="0">
+                <input type="hidden" id="up_status">
+              </div>
+              <div class="form-group">
+                <label>Giá</label>
+                <input type="number" name="up_price" id="up_price" class="form-control" data-rule-required="true" data-msg-required="The manufactory is required.">
+              </div>
+              <div class="form-group">
+                <label>Mô tả</label>
+                <textarea name="up_description" id="up_description" class="form-control" data-rule-required="true" data-msg-required="Mô tả không để trống.."></textarea>
+              </div>
+              <div class="form-group">
+                <label for="up_category">Danh mục</label>
+                <select id="up_category" class="form-control custom-select">
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+
+                <form id="up_singleUploadForm" name="up_singleUploadForm">
+                  <label for="up_singleFileUploadInput">Chọn ảnh:</label>
+                    <input id="up_singleFileUploadInput" type="file" name="fileEdit" class="file-input">
+                    <div id="imagePreview">
+                      <img style="width: 100px; height: 100px" class="image-preview__image">
+                      <img id="image" style="width: 100px; height: 100px" class="image-preview__default" >
+                    </div>
+                  <input type="submit" class="upload" hidden>
+                </form>
+                <input hidden type="text" id="up_imageName">
+              </div>
+            </form>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="save-button" >Lưu</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Start Category Modal -->
+    <div class="modal" id="categoryModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content col-8">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Thêm danh mục</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form id="categoryForm">
+              <div class="form-group">
+                <label>Tên danh mục</label>
+                <input type="text" name="category_name" id="category_name" class="form-control" data-rule-required="true" data-msg-required="The product name is required.">
+                <input type="hidden" name="categoryId" value="0">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary create-category">Lưu</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Category Modal -->
+  </div>
+  <!-- Control Sidebar -->
+</div>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/dist/js/adminlte.js"></script>
+<script src="/js/product/list.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/sweetalert2.min.js"></script>
+<script src="/js/jquery.validate-1.19.3.min.js"></script>
+<script src="/js/product/validate-form-product.js"></script>
+<script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+</body>
+</html>

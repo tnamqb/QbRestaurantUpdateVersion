@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "file",
+      "type": "com.codegym.restaurant.properties.FileStorageProperties",
+      "sourceType": "com.codegym.restaurant.properties.FileStorageProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "file.upload-dir",
+      "type": "java.lang.String",
+      "sourceType": "com.codegym.restaurant.properties.FileStorageProperties"
+    }
+  ],
+  "hints": []
+}

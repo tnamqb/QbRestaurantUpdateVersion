@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/sweetalert2.min.css}">
+    <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/sweetalert2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/app.js}"></script>
+</head>
+<body>
+<div class="container">
+    <form class="form-signin">
+        <fieldset class="row g-2">
+            <h2 class="form-signin-heading">Register form</h2>
+            <div class="form-group">
+                <div class="col-md-6" th:if="${param.error}">
+                    <div class="alert alert-danger" role="alert">
+                        <p style="margin-bottom: 0;">You entered wrong credentials!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-2">
+                <div class="col-md-6">
+                    <label for="fullName" class="form-label">FullName</label>
+                    <input type="text" class="form-control" id="fullName" name="fullName" placeholder="FullName" required autofocus>
+                </div>
+            </div>
+            <div class="form-group mb-2">
+                <div class="col-md-6">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required autofocus>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="text" class="form-control" id="password" name="password" placeholder="Password" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <button id="btnLoginPage" class="btn btn-lg btn-outline-primary btn-block" type="button">Login Page</button>
+                    <button id="btnCreate" class="btn btn-lg btn-outline-primary btn-block" type="button">Register</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script>
+    function createCustomer() {
+        let customer = {
+            fullName: $("#fullName").val(),
+            username: $("#username").val(),
+            password: $("#password").val()
+        };
+
+        $.ajax({
+            type: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "http://localhost:8080/api/register",
+            data: JSON.stringify(customer)
+        }).done((resp) => {
+            token = resp.accessToken;
+            App.showSuccessAlert("Successful data generation !");
+        }).fail(function() {
+            App.showErrorAlert("An error occurred. Please try again later !");
+        });
+    }
+
+    $("#btnCreate").on("click", () => {
+        createCustomer();
+    });
+
+    $("#btnLoginPage").on("click", () => {
+        window.location.href = "/login";
+    });
+</script>
+
+</body>
+</html>

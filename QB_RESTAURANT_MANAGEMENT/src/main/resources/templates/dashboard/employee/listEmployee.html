@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/head::header"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!--    Navbar start-->
+  <th:block th:replace="/layout/nav :: navbar"></th:block>
+  <!--    Navbar end-->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Quản lý tài khoản</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Quản lý tài khoản</li>
+            </ol>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <section class="content">
+          <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+              <div class="w-100 mb-2">
+                <div class="float-right">
+                  <a  onclick="showEmployeeModal()" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> Thêm nhân viên
+                  </a>
+                </div>
+              </div>
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap" id="employeeList">
+                  <thead class="thead-dark text-center">
+                  <tr>
+                    <th>Tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Chức vụ</th>
+                    <th class="text-center"></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+              <!-- ./col -->
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+        <!--Start Account Modal -->
+        <div class="modal" id="employeeModal">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content col-8">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Thêm nhân viên</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <form id="employeeForm">
+                  <div class="form-group">
+                    <label>Tên nhân viên</label>
+                    <input type="text" name="employee_name" id="employee_name" class="form-control" data-rule-required="true" data-msg-required="The product name is required.">
+                    <input type="hidden" name="employeeID" id="employeeID">
+                  </div>
+                  <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <input type="number" name="phoneNumber" id="phoneNumber" class="form-control" data-rule-required="true" data-msg-required="The manufactory is required.">
+                  </div>
+                  <div class="form-group">
+                    <label>Tên đăng nhập</label>
+                    <input type="text" name="user_name" id="user_name" class="form-control" data-rule-required="true" data-msg-required="The manufactory is required.">
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-4 control-label">Password</label>
+                    <div>
+                      <input id="password" type="password" class="form-control" name="password" value="">
+                      <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Ngày sinh</label>
+                    <input type="date" name="DOB" id="DOB" class="form-control" data-rule-required="true" data-msg-required="The manufactory is required.">
+                  </div>
+                  <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <input type="text" name="address" id="address" class="form-control" data-rule-required="true" data-msg-required="The manufactory is required.">
+                  </div>
+                  <div class="form-group">
+                    <label for="position">Chức vụ</label>
+                    <select id="position" class="form-control custom-select">
+                    </select>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <a  class="btn btn-primary" id="create-button">Lưu</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="modal" id="editEmployeeModal">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content col-8">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Thêm nhân viên</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <form id="editEmployeeForm">
+                  <div class="form-group">
+                    <label>Tên nhân viên</label>
+                    <input type="text" name="up_employee_name" id="up_employee_name" class="form-control" data-rule-required="true" data-msg-required="The product name is required.">
+                    <input type="hidden" name="up_employeeID" id="up_employeeID">
+                  </div>
+                  <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <input type="number" name="up_phoneNumber" id="up_phoneNumber" class="form-control" data-rule-required="true" data-msg-required="The manufactory is required.">
+                  </div>
+                  <div class="form-group">
+                    <label>Tên đăng nhập</label>
+                    <input type="text" name="up_user_name" id="up_user_name" class="form-control" data-rule-required="true" data-msg-required="The manufactory is required.">
+                  </div>
+<!--                  <div class="form-group">-->
+<!--                    <label>Mật khẩu</label>-->
+<!--                    <input type="password" name="up_password" id="up_password" class="form-control" data-rule-required="true" data-msg-required="The manufactory is required.">-->
+<!--                  </div>-->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label">Password</label>
+                    <div>
+                      <input id="up_password" type="up_password" class="form-control" name="up_password" value="">
+                      <span toggle="#up_password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Ngày sinh</label>
+                    <input type="date" name="up_DOB" id="up_DOB" class="form-control" data-rule-required="true" data-msg-required="The manufactory is required.">
+                  </div>
+                  <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <input type="text" name="up_address" id="up_address" class="form-control" data-rule-required="true" data-msg-required="The manufactory is required.">
+                  </div>
+                  <div class="form-group">
+                    <label for="up_position">Chức vụ</label>
+                    <select id="up_position" class="form-control custom-select">
+                    </select>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <a  class="btn btn-primary" id="edit-button">Lưu</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!--End Account Modal -->
+      </div>
+    </div>
+  </div>
+  <aside class="control-sidebar control-sidebar-dark">
+  </aside>
+</div>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script>
+  $(".toggle-password").click(function() {
+
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+      input.attr("type", "text");
+    } else {
+      input.attr("type", "password");
+    }
+  });
+</script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/dist/js/adminlte.js"></script>
+<script src="/js/employee/employee.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/sweetalert2.min.js"></script>
+<script src="/js/jquery.validate-1.19.3.min.js"></script>
+<script src="/js/employee/validate-employee-form.js"></script>
+<script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/layout/head::header">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed" style="margin: 10px">
+<div class="wrapper">
+
+  <!--  Navbar start-->
+    <th:block th:replace="/layout/nav :: navbar"></th:block>
+  <!--  Navbar end-->
+
+  <div class="content-wrapper" >
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Danh sách khuyến mãi</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a th:href="@{/dashboard}">Home</a></li>
+              <li class="breadcrumb-item active">Khuyến mãi</li>
+            </ol>
+          </div>
+          <div class="w-100 mb-0">
+            <div class="float-right">
+              <a href="javascript:;" onclick="voucher.showModal()" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Tạo khuyến mãi
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover table-bordered text-nowrap table-voucher">
+        <thead class="thead-dark text-center">
+        <tr>
+          <th>Mã KM</th>
+          <th>Tên khuyến mãi</th>
+          <th>Phần trăm(%)</th>
+          <th>Ngày bắt đầu </th>
+          <th>Ngày kết thúc</th>
+          <th>Ghi chú</th>
+          <th>Trạng thái</th>
+          <th></th>
+        </tr>
+        </thead>
+          <tbody>
+
+          </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Strart Voucher Modal -->
+  <div class="modal" id="voucherModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content col-8">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Thêm khuyến mãi</h4>
+          <button type="button" class="close" data-dismiss="modal" id="addVoucherButton">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form id="voucherForm">
+            <div class="form-group">
+              <label>Tên khuyến mãi</label>
+              <input type="text" name="voucherName" class="form-control" data-rule-required="true" data-msg-required="Không để trống trường này">
+              <input type="hidden" name="voucherId" id="voucherId" value="0">
+            </div>
+            <div class="form-group">
+              <label>Ngày bắt đầu</label>
+              <input type="date" name="beginDate" id="beginDate" class="form-control " data-rule-required="true" data-msg-required="Không để trống trường này">
+            </div>
+            <div class="form-group">
+              <label>Ngày kết thúc</label>
+              <input type="date" name="endDate" id="endDate" class="form-control" data-rule-required="true" data-msg-required="Không để trống trường này">
+            </div>
+            <div class="form-group">
+              <label>Phần trăm</label>
+              <input type="number" name="percent" id="percent" class="form-control" data-rule-required="true" data-msg-required="Không để trống trường này">
+            </div>
+            <div class="form-group">
+              <label>Ghi chú</label>
+              <textarea name="note" id="note" class="form-control"></textarea>
+            </div>
+          </form>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <a href='javascript:;' class="btn btn-primary" onclick="voucher.save()">Save</a>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- End Voucher Modal -->
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/dist/js/adminlte.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/sweetalert2.min.js"></script>
+<script src="/js/jquery.validate-1.19.3.min.js"></script>
+<script src="/js/validator.js"></script>
+<script src="/dataTables/datatables.min.js"></script>
+<script src="/js/moment.js"></script>
+
+
+<!-- voucher.js-->
+<script src="/js/voucher/voucher.js"></script>
+<script src="/js/bootbox.min.js"></script>
+
+</body>
+
+</html>

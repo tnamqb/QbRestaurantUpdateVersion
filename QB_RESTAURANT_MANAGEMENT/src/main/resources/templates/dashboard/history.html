@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/head::header"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <!--    Navbar start-->
+    <th:block th:replace="/layout/nav :: navbar"></th:block>
+    <!--    Navbar end-->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Lịch sử thanh toán</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active">Lịch sử thanh toán</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="invoice p-3 mb-3">
+            <!-- title row -->
+            <div class="row">
+                <div class="col-12">
+                    <h4>
+                        <i class="fas fa-globe"></i> QB Restaurant
+                        <small class="float-right">Ngày : 02/08/2020</small>
+                    </h4>
+                </div>
+            </div>
+            <!-- info row -->
+            <div class="row invoice-info">
+                <div class="col-sm-4 invoice-col">
+                    <address>
+                        <strong>QB Restaurant</strong><br>
+                        TP Đồng Hới, Quảng Bình<br>
+                        Số điện thoại: (804) 123-5432<br>
+                        Email: qbrestaurant@gmail.com
+                    </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                    <b>Invoice #007612</b><br>
+                    <b>Order ID:</b> 4F3S8J<br>
+                    <b>Payment Due:</b> 02/08/2020<br>
+                    <b>Account:</b> Nguyễn V
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+
+            <!-- Table row -->
+            <div class="row">
+                <div class="col-12 table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Mã hóa đơn</th>
+                            <th>Ngày</th>
+                            <th>Tên</th>
+                            <th>Nhân viên</th>
+                            <th>Khuyến mãi</th>
+                            <th>Tổng</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td type="button" data-toggle="modal" onclick="showOrderDetail()">1</td>
+                            <td>02/08/2020</td>
+                            <td>Hóa đơn A</td>
+                            <td>Nguyễn Văn A</td>
+                            <td>10%</td>
+                            <td>$30.0</td>
+                        </tr>
+                        <tr>
+                            <td type="button" data-toggle="modal" onclick="showOrderDetail()">2</td>
+                            <td>02/08/2020</td>
+                            <td>Hóa đơn B</td>
+                            <td>Nguyễn Văn B</td>
+                            <td>5%</td>
+                            <td>$50.0</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Start Order Detail Modal -->
+            <div class="modal" id="orderDetailModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content col-8">
+                        <div class="row">
+                            <!-- /.col -->
+                            <p class="lead">Chi tiết hóa đơn</p>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th style="width:50%">Tên sản phẩm</th>
+                                        <td>ABC</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Số lượng</th>
+                                        <td>2.0</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Đơn giá</th>
+                                        <td>50.000 VND</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tổng</th>
+                                        <td>100.000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <div class="row no-print">
+                                                <div>
+                                                    <a href="/pages/invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function showOrderDetail() {
+                    $('#orderDetailModal').modal('show')
+                }
+            </script>
+            <script src="plugins/jquery/jquery.min.js"></script>
+            <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="dist/js/adminlte.js"></script>
+        </div>
+    </div>
+</div>
+</body>
+</html>

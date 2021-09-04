@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QBrestaurant</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=WindSong:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" type="text/css" href="/application/css/header-style.css">
+    <link rel="stylesheet" href="/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/application/css/overlay-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="/application/css/category.css">
+    <link rel="stylesheet" type="text/css" href="/application/css/desk-information.css">
+</head>
+<body>
+<header id="header">
+    <input type="checkbox"/>
+    <div class="menu_icon">
+        <div class="menu_line">
+
+        </div>
+    </div>
+    <div class="menu_item">
+        <li><a th:href="@{/app}"><img src="/uploads/logoQBrestaurant/logo1.gif" style="width: 180px; border-radius: 50%; margin-top: 15px"></a></li>
+        <li><span th:text="${userInfo}" th:value="${userInfo}" id="userInfo"></span></li>
+        <li><a onclick="menuQuickShow()" style="cursor: pointer">Thực đơn</a></li>
+        <li><a href="">Đổi mật khẩu</a></li>
+        <li><a th:href="@{/logout}">Đăng xuất</a></li>
+        <li>Liên hệ quản lý</li>
+        <li><a href="https://www.facebook.com/bampluto"><img src="/application/image/038_001_facebook_social_network_android_material.png"></a>
+            <a href="https://twitter.com/login?lang=vi"><img src="/application/image/038_003_twitter_social_network_android_material.png"></a>
+            <a href="https://www.instagram.com/accounts/login/"><img src="/application/image/038_011_instagram_mobile_photo_network_android_material.png"></a>
+        </li>
+    </div>
+    <div class="header_text">
+        <h1 style="color: wheat; font-family: 'WindSong', cursive;font-size: 100px ">QB restaurant</h1>
+        <h3 style="color: whitesmoke;margin-bottom: 50px">Lý Thường Kiệt - TP. Đồng Hới</h3>
+        <a onclick="showAppModal()">Chọn bàn</a>
+    </div>
+</header>
+
+<!-- Modal: modalMenuQuick -->
+<div class="modal fade" id="modalMenuQuick" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Thực đơn</h4>
+                <button type="button" class="close" data-dismiss="modal" style="color: wheat; border-radius: 50%;border: 1px solid darkred; background-color: #921e12"><i class="far fa-times-circle" ></i></button>
+            </div>
+            <div class="modal-body  menu-quick-style">
+                <div class="categories">
+                    <div class="category-title">
+                    </div>
+                    <div class="food-information">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<!-- End Modal: modalMenuQuick -->
+
+
+<!-- Modal: modalWork -->
+<div class="modal" id="appModal" >
+    <div class="modal-dialog modal-scrollbar-measure modal-fullscreen">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">QB RESTAURANT</h4>
+                <button type="button" class="close" data-dismiss="modal" style="color: wheat; border-radius: 50%;border: 1px solid darkred; background-color: #921e12"><i class="far fa-times-circle" ></i></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row" >
+                    <div class="col-md-7">
+                        <div class="row">
+                            <a class="btn btn-primary col-md-6" onclick="getAllDeskActivate()"><i class="fas fa-chair"></i>&nbsp; Phòng/ Bàn</a>
+                            <a class="btn btn-info  col-md-6 text-white  menu-action" onclick="getAllItemCategory()"><i class="fas fa-book-open"></i>&nbsp; Thực đơn</a>
+                        </div>
+                        <div class="row">
+                            <div id="deskDisplay" class="style-scrollbar">
+                            </div>
+                            <div class="categories">
+                                <div class="category-title">
+                                </div>
+                                <div class="food-information style-scrollbar">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 " >
+                        <p class="btn btn-secondary col-12"><i class="fas fa-info-circle"></i>&nbsp;Thông tin <span id ="deskName" value = ""></span></p>
+                        <div class="row listOrder-style">
+                            <div  id="listOrderOfDeskShow"  class="style-scrollbar bg-light">
+                            </div>
+                            <div  id="listOrderCreate"  class="style-scrollbar">
+                            </div>
+                        </div>
+                        <div class="row button-action">
+                           <div  class="button-left-bottom col-7" >
+                                <a class="btn btn-primary text-white" onclick="showModalChange()" style="cursor: pointer">Đổi bàn</a>
+                                <a href="" class="btn btn-warning text-white">Gộp bàn</a>
+                            </div>
+                            <div  class="button-right-bottom col-5">
+                                <a href="" class="btn btn-success">Đặt món</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Modal footer -->
+        </div>
+    </div>
+</div>
+</div>
+<!-- End Modal: modalWork -->
+
+<!--Modal: modal Confirm Change Desk-->
+<div class="modal fade" id="modalDeskChange" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center" style="width: 30%; height: 30%; display: block; border: none; position: absolute; top: 25%; left: 50%; transform: translateX(-50%); background-color: darkgrey">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Bạn muốn đổi bàn ???</p>
+            </div>
+
+            <!--Body-->
+            <input type="hidden" id="idTableChange">
+            <div class="modal-body" style="border: none; color: red">
+                <i class="fas fa-exchange-alt fa-4x"></i>
+            </div>
+            <div>
+                <p>Đổi <span id="tableChange"></span> thành
+                    <select id="tableNewChange">
+                    </select>
+                </p>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer flex-center" style="justify-content: center !important; background-color: darkgrey">
+                <a href="#" class="btn btn-outline-danger" onclick="changeDesk()">Đổi</a>
+                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Không</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--end: modal Confirm Change Desk-->
+
+</body>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/sweetalert2.min.js"></script>
+<script src="/application/js/appModal.js"></script>
+<script src="/application/js/deskModal.js"></script>
+</html>

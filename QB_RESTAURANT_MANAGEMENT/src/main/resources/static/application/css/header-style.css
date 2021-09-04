@@ -1,0 +1,157 @@
+header {
+    width: 100%;
+    height: 100vh;
+    max-height: 1024px;
+    background: url(/application/image/anh-mon-an-11-scaled.jpg);
+    background-position: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    justify-content: center;
+
+}
+header li {
+    list-style: none;
+}
+
+header a {
+    text-decoration: none;
+}
+
+header ::before {
+    position: absolute;
+    /* width: 100%; */
+    /* height: 100%; */
+    content: "";
+    display: block;
+}
+
+header input {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 20px;
+    left: 14px;
+    opacity: 0;
+    /*độ mờ */
+    cursor: pointer;
+    position: fixed;
+    z-index: 2;
+}
+
+header input:checked~.menu_icon .menu_line::before {
+    transform: rotate(90deg);
+    top: 0px;
+}
+
+header input:checked~.menu_icon .menu_line::after {
+    transform: rotate(90deg);
+    top: 0px;
+}
+
+header input:checked~.menu_icon .menu_line {
+    transform: rotate(135deg);
+    transition: 0.3s;
+}
+
+header input:checked~.menu_item {
+    right: 1%;
+}
+.header_text {
+    position: absolute;
+    align-items: center;
+}
+
+.header_text h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.header_text a {
+    padding: 12px 30px;
+    background: rgb(212, 121, 17);
+    color: black;
+    font-size: 30px;
+    border-radius: 70px;
+
+}
+
+.header_text a:hover {
+    background: transparent;
+    color: rgb(212, 121, 17);
+    border: 2px solid rgb(212, 121, 17);
+    cursor: pointer;
+}
+
+.menu_icon {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 20px;
+    left: 14px;
+    opacity: 1;
+    cursor: pointer;
+    position: fixed;
+    display: flex;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu_line {
+    height: 4px;
+    width: 100%;
+    background: rgb(212, 121, 17);
+    position: relative;
+}
+
+.menu_line::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    position: absolute;
+    background: rgb(212, 121, 17);
+    top: -14px;
+}
+
+.menu_line::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    position: absolute;
+    background: rgb(212, 121, 17);
+    top: 14px;
+}
+
+.menu_item {
+    position: fixed;
+    width: 235px;
+    height: 65vh;
+    background-color: antiquewhite;
+    top: 20px;
+    padding-top: 5px;
+    margin-right: 15px;
+    right: -100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    z-index: 10;
+    flex-direction: column;
+    font-size: 20px;
+    transition: 0.5s;
+    border-radius: 20px;
+    border:2px solid rgb(212, 121, 17);
+
+}
+
+.menu_item li {
+    line-height: 50px;
+}
+
+.menu_item li a {
+    color: rgb(212, 121, 17);
+}

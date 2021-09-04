@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/layout/head::header">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed" style="margin: 10px">
+<div class="wrapper">
+
+    <!--  Navbar start-->
+    <th:block th:replace="/layout/nav :: navbar"></th:block>
+    <!--  Navbar end-->
+
+    <div class="content-wrapper" >
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Danh sách hóa đơn</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a th:href="@{/dashboard}">Home</a></li>
+                            <li class="breadcrumb-item active">Hóa đơn</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover table-bordered text-nowrap table-bill">
+                <thead class="thead-dark text-center">
+                <tr>
+                    <th>Mã hóa đơn </th>
+                    <th>Tên khách hàng</th>
+                    <th>Tổng tiền</th>
+                    <th>Ngày thanh toán</th>
+                    <th>Ghi chú</th>
+
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Strart Voucher Modal -->
+    <div class="modal" id="billModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content col-8">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Chi tiết hóa đơn</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Voucher Modal -->
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/dist/js/adminlte.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/sweetalert2.min.js"></script>
+<script src="/js/jquery.validate-1.19.3.min.js"></script>
+<script src="/js/validator.js"></script>
+<script src="/dataTables/datatables.min.js"></script>
+<script src="/js/moment.js"></script>
+
+
+<!-- bill.js-->
+<script src="/js/bill/bill.js"></script>
+<script src="/js/bootbox.min.js"></script>
+
+</body>
+
+</html>
